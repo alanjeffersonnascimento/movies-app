@@ -1,4 +1,4 @@
-export interface Movie {
+export interface Tv {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -15,16 +15,9 @@ export interface Movie {
   vote_count: number;
 }
 
-export interface MovieDto {
-  page: number;
-  results: Movie[];
-  total_results: number;
-  total_pages: number;
-}
-
 export interface TvDto {
   page: number;
-  results: Movie[];
+  results: Tv[];
   total_results: number;
   total_pages: number;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MovieDto } from '../models/movie';
+import { TvDto } from '../models/tv';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -15,6 +16,22 @@ export class MoviesService {
 
   getMovies(type: string = 'upcoming', count: number = 12) {
     return this.http.get<MovieDto>(`${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`).pipe(
+      switchMap((res) => {
+        return of(res.results.slice(0, count));
+      })
+    );
+  }
+
+  serachMovies(page: number) {
+    return this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?page=${page}&api_key=${this.apiKey}`).pipe(
+      switchMap((res) => {
+        return of(res.results);
+      })
+    );
+  }
+
+  getTvs(type: string = 'latest', count: number = 12) {
+    return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}?api_key=${this.apiKey}`).pipe(
       switchMap((res) => {
         return of(res.results.slice(0, count));
       })
