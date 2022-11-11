@@ -47,3 +47,9 @@ export interface MovieVideo {
   site: string;
   key: string;
 }
+
+export interface MovieImages {
+  backdrops: {
+    file_path: string;
+  }[];
+}
